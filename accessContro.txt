@@ -1,0 +1,8 @@
+# robot.txt এ কোনো sensetive file আছে কিনা তা, চেক করতে হবে।
+#when open a account check " view source " for sensetive information like admin panel
+#একাউন্ট খোলার সময় burpSuite দিয়ে intercep করে কুকির ভিতর admin=false থাকলে admin=true করে দিয়ে admin access নিতে হবে।
+#account login করে। তারপর email upladte options থাকলে ওই যায়গায় email দিয়ে burpSuite a intercep করতে হবে। সেখানে অনেক সময় userRole:1 অথবা urseRole:A এমন থাকে। সেগুলো চেঞ্জ করে অনেক সময় অন্য userএর একাউন্ট এক্সস নেয়া যায়।
+#account login করে। তারপর email upladte options থাকলে ওই যায়গায় email দিয়ে burpSuite a intercep করতে হবে। সেখানে অনেক সময় userRole:1 অথবা urseRole:A অথবা userID:pip এমন থাকে। সেগুলো চেঞ্জ করে অনেক সময় অন্য userএর একাউন্ট এক্সস নেয়া যায়।
+#account login করার সময় প্রথমে ইন্টারসেপ্ট করতে হবে। তারপর প্রত্যেকতা request চেক করতে হবে কোথায় userID আছে। সেখানে নাম থাকলে চেন্জ করে দিতে হবে। যেমন -admin, user,administrator,deshboard
+#আমরা অনেক সময় কোনো blog পড়ার সময় দেখি author এর নাম লেখা থাকে। সেখানে author নামে ক্লিক করলে আমরা অনেক
+sessionID পাবো। তার সেশন আমার সেশন  sessionID তে দিলে আর এডমিন এক্সসেস পাওয়া যাবে।
