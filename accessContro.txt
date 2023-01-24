@@ -1,8 +1,17 @@
 # robot.txt এ কোনো sensetive file আছে কিনা তা, চেক করতে হবে।
-#when open a account check " view source " for sensetive information like admin panel
-#একাউন্ট খোলার সময় burpSuite দিয়ে intercep করে কুকির ভিতর admin=false থাকলে admin=true করে দিয়ে admin access নিতে হবে।
-#account login করে। তারপর email upladte options থাকলে ওই যায়গায় email দিয়ে burpSuite a intercep করতে হবে। সেখানে অনেক সময় userRole:1 অথবা urseRole:A এমন থাকে। সেগুলো চেঞ্জ করে অনেক সময় অন্য userএর একাউন্ট এক্সস নেয়া যায়।
-#account login করে। তারপর email upladte options থাকলে ওই যায়গায় email দিয়ে burpSuite a intercep করতে হবে। সেখানে অনেক সময় userRole:1 অথবা urseRole:A অথবা userID:pip এমন থাকে। সেগুলো চেঞ্জ করে অনেক সময় অন্য userএর একাউন্ট এক্সস নেয়া যায়।
-#account login করার সময় প্রথমে ইন্টারসেপ্ট করতে হবে। তারপর প্রত্যেকতা request চেক করতে হবে কোথায় userID আছে। সেখানে নাম থাকলে চেন্জ করে দিতে হবে। যেমন -admin, user,administrator,deshboard
-#আমরা অনেক সময় কোনো blog পড়ার সময় দেখি author এর নাম লেখা থাকে। সেখানে author নামে ক্লিক করলে আমরা অনেক
-sessionID পাবো। তার সেশন আমার সেশন  sessionID তে দিলে আর এডমিন এক্সসেস পাওয়া যাবে।
+# when open a account check " view source " for sensetive information like admin panel
+# একাউন্ট খোলার সময় burpSuite দিয়ে intercep করে কুকির ভিতর admin=false থাকলে admin=true করে দিয়ে admin access নিতে হবে।
+# account login করে। তারপর email upladte options থাকলে ওই যায়গায় email দিয়ে burpSuite a intercep করতে হবে। সেখানে অনেক সময় userRole:1 অথবা urseRole:A এমন থাকে। সেগুলো চেঞ্জ করে অনেক সময় অন্য userএর একাউন্ট এক্সস নেয়া যায়।
+# account login করে। তারপর email upladte options থাকলে ওই যায়গায় email দিয়ে burpSuite a intercep করতে হবে। সেখানে অনেক সময় userRole:1 অথবা urseRole:A অথবা userID:pip এমন থাকে। সেগুলো চেঞ্জ করে অনেক সময় অন্য userএর একাউন্ট এক্সস নেয়া যায়।
+# account login করার সময় প্রথমে ইন্টারসেপ্ট করতে হবে। তারপর প্রত্যেকতা request চেক করতে হবে কোথায় userID আছে। সেখানে নাম থাকলে চেন্জ করে দিতে হবে। যেমন -admin, user,administrator,deshboard
+# আমরা অনেক সময় কোনো blog পড়ার সময় দেখি author এর নাম লেখা থাকে। সেখানে author নামে ক্লিক করলে আমরা অনেক
+sessionID পাবো। তার সেশন আমার সেশন  sessionID তে দিলে আর এডমিন এক্সসেস পাওয়া।
+
+#account login করার সময় প্রথমে ইন্টারসেপ্ট করতে হবে। তারপর প্রত্যেকতা request চেক করতে হবে কোথায় userID আছে। সেখানে নাম থাকলে চেন্জ করে দিতে হবে। যেমন -admin, user,administrator,deshboard । তারপর response ভিতর একটি data leakage information পাওয়া যাবে। যেমন- api key, token, user api।
+#  account login করতে হবে। তার পর একাউন্ট এ ক্লিক করে intercep করতে হবে। তারপর userID এর জায়াগায় administrator/admin/ এইগুলো লিখতে হবে। তারপর response এ দেখতে হবে আমাদের কোনো password disclose হচ্ছে কিনা।তার অর সেই username (administrator/admin) তার পর disclose হওয়া password দিয়ে এডমিন access নিতে হবে।
+# IDOR -> অনেক সময় আমরা website a হেল্প chat করি । সেক্ষেত্রে আমরা কি চ্যাট করছি আমাদের ডাউনলোড করতে দেয়। যেই পাইলগুলো 1.txt /2.txt এই ধরনের থাকে। সেই ক্ষেত্রে আমারা ডাউনলোড না করে ,আমরা intercep করে 2.txt / 3.txt এর জায়াগায় 1.txt /2.txt /3.txt/admin.txt এই ধরনের bruteforce করতে পারি। অনেক সময় এই গুলোর ভিতর admin and password disclose থাকে।
+
+## Advance ##
+# example.com/admin আমি চাচ্ছি admin access নিতে । কিন্ত আমাকে deny করে দিচ্ছে। সেক্ষে আমারা একটি নতুন header যোগ করতে পারি। যেমন - X-Original-Url: /invalid   -> এখানে আমরা invalid এর জায়গায় admin ব্যাবহার করবো।তারপর আমরা response দেখবো কোনো information disclose হচ্ছে কিনা ,যেটা দিয়ে আমরা এডমিন Access নিতে পারি।
+# 1st account access by 2nd account -> প্রথমে আমার যেই একাউন্টের email chage করবো ,তাকে intercep করে repeter এ পাঠিয়ে দিতে হবে। তারপর ২য় একাউন্ট লগিন করে ,সেই একাউন্টের কুকি নিতে হবে। সেই কুকি প্রথম একাউন্টের কুকির পরিবর্তে ব্যবহার করতে হবে। তার ভিবিন্ন mathod(GET/POST/POSTX/OPTION/DELETE) এর মধ্যমে access করার চেষ্টা করতে হবে।যদি userID থাকে,সেখানে admin/administrator এই গুলো দিয়ে ট্রাই করতে হবে।
+#
